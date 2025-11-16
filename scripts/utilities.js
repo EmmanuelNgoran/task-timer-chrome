@@ -61,7 +61,6 @@ function dialog_display(dialog) {
                 case 1: case 'alert': default:
                     $('#dialog-confirm').text(locale('btnOK'));
                     $('#dialog-cancel').hide();
-                    var type = 1;
                     break;
             }
         }
