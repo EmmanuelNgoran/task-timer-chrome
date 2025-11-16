@@ -1,15 +1,19 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
 
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "version": "3.10.6",
     "default_locale": "en",
     "offline_enabled": true,
-    "minimum_chrome_version": "22",
+    "minimum_chrome_version": "88",
 
     "permissions": ["alarms", "storage"],
-    "web_accessible_resources": ["style/images/icon-64.png"],
+    
+    "web_accessible_resources": [{
+        "resources": ["style/images/icon-64.png"],
+        "matches": ["<all_urls>"]
+    }],
 
     "icons": {
         "16": "style/images/icon-16.png",
@@ -17,14 +21,18 @@
         "128": "style/images/icon-128.png"
     },
 
-    "app": {
-        "launch": {
-            "local_path": "main.html"
-        }
+    "action": {
+        "default_popup": "main.html",
+        "default_icon": {
+            "16": "style/images/icon-16.png",
+            "64": "style/images/icon-64.png",
+            "128": "style/images/icon-128.png"
+        },
+        "default_title": "__MSG_appName__"
     },
     
     "background": {
-        "scripts": ["scripts/background.js"],
-        "persistent": false
+        "service_worker": "scripts/background.js",
+        "type": "module"
     }
 }

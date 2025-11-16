@@ -1,8 +1,8 @@
-var tasks = [], task_count = 0;
-var displaying_task = -1;
+let tasks = [], task_count = 0;
+let displaying_task = -1;
 
 // The task settings checkboxes (ID: default value)
-var task_settings_checkboxes = {
+const task_settings_checkboxes = {
     'exclude-totals': false,
     'exclude-charts': false
 };
@@ -11,17 +11,21 @@ var task_settings_checkboxes = {
 function update_time() {
     try {
         // Get the real time
-        var now;
+        let now;
+        let year, month, day, hour;
         if(Setting('track-history')) {
             now = new Date();
-            var year = now.getFullYear(), month = now.getMonth(), day = now.getDate(), hour = now.getHours();
+            year = now.getFullYear();
+            month = now.getMonth();
+            day = now.getDate();
+            hour = now.getHours();
         }
 
         // Go through the tasks array
-        for(var i = 0; i < task_count; i++) {
+        for(let i = 0; i < task_count; i++) {
             if(tasks[i].last_tick) {
                 // Update the time for the task
-                var gap = Date.now() - tasks[i].last_tick;
+                const gap = Date.now() - tasks[i].last_tick;
                 tasks[i].last_tick = Date.now();
                 tasks[i].current_secs += Math.round(gap / 1000);
                 if(tasks[i].current_secs > 59) {

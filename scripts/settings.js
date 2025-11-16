@@ -180,7 +180,7 @@ function Setting(id, value, only_not_exists) {
     if(typeof only_not_exists == 'undefined') only_not_exists = false;
 
     // Check if the setting exists
-    var exists = false;
+    let exists = false;
     if(typeof localStorage[id] != 'undefined') exists = true;
 
     if(typeof value != 'undefined' && ((exists && !only_not_exists) || (!exists && only_not_exists))) {

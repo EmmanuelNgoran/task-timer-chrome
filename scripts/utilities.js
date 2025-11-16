@@ -1,4 +1,4 @@
-var dialog_queue = [];
+let dialog_queue = [];
 
 // Trigger a dialog
 function dialog(text, callback, data, type, override, steal_focus, check_queue, force_native) {
@@ -16,12 +16,12 @@ function dialog(text, callback, data, type, override, steal_focus, check_queue, 
         callback(true, data);
     } else {
         // Set the queue data
-        var queue_item = {'text': text, 'type': type, 'callback': callback, 'data': data, 'steal_focus': steal_focus, 'force_native': force_native};
+        const queue_item = {'text': text, 'type': type, 'callback': callback, 'data': data, 'steal_focus': steal_focus, 'force_native': force_native};
 
         // Check if it's already in the queue
-        var in_queue = false;
+        let in_queue = false;
         if(check_queue) {
-            for(var i = 0; i < dialog_queue.length; i++) {
+            for(let i = 0; i < dialog_queue.length; i++) {
                 if(JSON.stringify(dialog_queue[i]) === JSON.stringify(queue_item)) {
                     in_queue = true;
                     break;
@@ -39,7 +39,7 @@ function dialog(text, callback, data, type, override, steal_focus, check_queue, 
 
 // Create and display a modal dialog
 function dialog_display(dialog) {
-    var text = dialog_queue[dialog].text, type = dialog_queue[dialog].type, callback = dialog_queue[dialog].callback, data = dialog_queue[dialog].data;
+    const text = dialog_queue[dialog].text, type = dialog_queue[dialog].type, callback = dialog_queue[dialog].callback, data = dialog_queue[dialog].data;
 
     if(Setting('custom-dialogs') && !dialog_queue[dialog].force_native) {
         dialog_open = true;

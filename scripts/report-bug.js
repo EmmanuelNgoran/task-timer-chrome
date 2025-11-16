@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 	// Print debug info
 	$('#debug-info')
-		.html('<strong>App Version:</strong> '+ chrome.app.getDetails().version +'<br />')
+		.html('<strong>App Version:</strong> '+ chrome.runtime.getManifest().version +'<br />')
 		.append('<strong>localStorage:</strong><br />'+ JSON.stringify(localStorage))
 	;
 
