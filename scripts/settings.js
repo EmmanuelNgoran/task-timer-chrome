@@ -1,5 +1,5 @@
 // Settings checkboxes (ID: Default value)
-var settings_checkboxes = {
+const settings_checkboxes = {
     'confirm-reset': true,
     'confirm-delete': true,
     'autostart-default': false,
@@ -27,7 +27,7 @@ var settings_checkboxes = {
 };
 
 // Other settings (ID: Default value)
-var settings_other = {
+const settings_other = {
     'sound-type': 1,
     'custom-sound': '',
 

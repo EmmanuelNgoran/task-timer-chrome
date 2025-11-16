@@ -52,11 +52,11 @@ $(function() {
         localStorage['old-version'] = version;
 
         // Add to the launch count
-        var launches = Setting('launches', Setting('launches', 0, true) + 1);
+        const launches = Setting('launches', Setting('launches', 0, true) + 1);
 
         // Show a rating reminder if at a multiple of 6 launches
         if(launches % 6 === 0 && typeof localStorage['rated'] == 'undefined') {
-            dialog(locale('confRating'), function(status) {
+            dialog(locale('confRating'), (status) => {
                 if(status) {
                     localStorage['rated'] = 'true';
                     window.open('https://chrome.google.com/webstore/detail/task-timer/aomfjmibjhhfdenfkpaodhnlhkolngif/reviews');
@@ -72,7 +72,7 @@ $(function() {
             tasks = JSON.parse(localStorage['tasks']);
             task_count = tasks.length;
 
-            for(var i = 0; i < task_count; i++) {
+            for(let i = 0; i < task_count; i++) {
                 // Convert from the old method of storing times to the new one
                 if(typeof tasks[i].current_hours == 'undefined') {
                     tasks[i].current_hours = Math.floor(tasks[i].current);

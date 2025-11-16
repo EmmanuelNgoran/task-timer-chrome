@@ -1,4 +1,4 @@
-var editing_task = -1, was_running;
+let editing_task = -1, was_running;
 
 // Begin editing a task's name
 function edit_name(task) {
