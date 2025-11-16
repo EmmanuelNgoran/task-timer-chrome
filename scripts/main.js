@@ -1,18 +1,19 @@
-var app, version, lang, load, background = false, autosaves = 0,  dragging = false, preview_sound = false; // General variables
-var alarm_open = false, task_open = false, tools_open = false, dialog_open = false; // Menu state variables
-var js_error_shown = false, no_local_files_alerted = false; // Alert state variables
-var current_plot, total_plot; // Plot variables
-var save_timer, timer, timer_step = 0; // Timer variables
-var DEBUG = false; // Debug mode
+let app, version, lang, load;
+let background = false, autosaves = 0, dragging = false, preview_sound = false; // General variables
+let alarm_open = false, task_open = false, tools_open = false, dialog_open = false; // Menu state variables
+let js_error_shown = false, no_local_files_alerted = false; // Alert state variables
+let current_plot, total_plot; // Plot variables
+let save_timer, timer, timer_step = 0; // Timer variables
+const DEBUG = false; // Debug mode
 
 // Set error event (most important event)
-window.onerror = function(msg, url, line) { js_error(msg, url, line); };
+window.onerror = (msg, url, line) => { js_error(msg, url, line); };
 
 // Document finished loading
 $(function() {
     try {
         // Set some variables
-        app = chrome.app.getDetails();
+        app = chrome.runtime.getManifest();
         version = app.version;
         lang = window.navigator.language;
         load = $('#loading');
@@ -51,11 +52,11 @@ $(function() {
         localStorage['old-version'] = version;
 
         // Add to the launch count
-        var launches = Setting('launches', Setting('launches', 0, true) + 1);
+        const launches = Setting('launches', Setting('launches', 0, true) + 1);
 
         // Show a rating reminder if at a multiple of 6 launches
         if(launches % 6 === 0 && typeof localStorage['rated'] == 'undefined') {
-            dialog(locale('confRating'), function(status) {
+            dialog(locale('confRating'), (status) => {
                 if(status) {
                     localStorage['rated'] = 'true';
                     window.open('https://chrome.google.com/webstore/detail/task-timer/aomfjmibjhhfdenfkpaodhnlhkolngif/reviews');
@@ -71,7 +72,7 @@ $(function() {
             tasks = JSON.parse(localStorage['tasks']);
             task_count = tasks.length;
 
-            for(var i = 0; i < task_count; i++) {
+            for(let i = 0; i < task_count; i++) {
                 // Convert from the old method of storing times to the new one
                 if(typeof tasks[i].current_hours == 'undefined') {
                     tasks[i].current_hours = Math.floor(tasks[i].current);

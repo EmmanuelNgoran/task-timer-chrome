@@ -1,8 +1,8 @@
-var tasks = [], task_count = 0;
-var displaying_task = -1;
+let tasks = [], task_count = 0;
+let displaying_task = -1;
 
 // The task settings checkboxes (ID: default value)
-var task_settings_checkboxes = {
+const task_settings_checkboxes = {
     'exclude-totals': false,
     'exclude-charts': false
 };
@@ -11,17 +11,21 @@ var task_settings_checkboxes = {
 function update_time() {
     try {
         // Get the real time
-        var now;
+        let now;
+        let year, month, day, hour;
         if(Setting('track-history')) {
             now = new Date();
-            var year = now.getFullYear(), month = now.getMonth(), day = now.getDate(), hour = now.getHours();
+            year = now.getFullYear();
+            month = now.getMonth();
+            day = now.getDate();
+            hour = now.getHours();
         }
 
         // Go through the tasks array
-        for(var i = 0; i < task_count; i++) {
+        for(let i = 0; i < task_count; i++) {
             if(tasks[i].last_tick) {
                 // Update the time for the task
-                var gap = Date.now() - tasks[i].last_tick;
+                const gap = Date.now() - tasks[i].last_tick;
                 tasks[i].last_tick = Date.now();
                 tasks[i].current_secs += Math.round(gap / 1000);
                 if(tasks[i].current_secs > 59) {
@@ -166,8 +170,8 @@ function delete_task(task, override) {
 
             if(status) {
                 load.show();
-                $('#new-btn, #task-'+ task +' button').attr('disabled', 'disabled');
-                $('#task-'+ task +' img').addClass('disabled');
+                $(`#new-btn, #task-${task} button`).attr('disabled', 'disabled');
+                $(`#task-${task} img`).addClass('disabled');
                 $('table#task-list tbody tr').addClass('nodrag nodrop');
                 $('table#task-list').tableDnDUpdate();
 
@@ -177,17 +181,17 @@ function delete_task(task, override) {
                 task_count--;
 
                 // Animate accordingly.
-                setTimeout(function() {
+                setTimeout(() => {
                     if(task_count === 0) {
                         $('#edit-tasks').fadeOut();
-                        $('table#task-list').fadeOut(400, function() {
+                        $('table#task-list').fadeOut(400, () => {
                             $('table#task-list tbody').empty();
                             $('#no-tasks').fadeIn();
 
                             $('#new-btn').removeAttr('disabled');
                         });
                     } else {
-                        $('#task-'+ task).fadeOut(400, function() {
+                        $(`#task-${task}`).fadeOut(400, () => {
                             rebuild_list();
                             $('#new-btn').removeAttr('disabled');
                         });
@@ -235,11 +239,11 @@ function toggle_task(task, update) {
             $('#task-'+ task).removeClass('running');
 
             // Cancel the future alarm for the task reaching its goal
-            chrome.alarms.clear('task-' + task);
+            chrome.alarms.clear(`task-${task}`);
         } else {
             // Disable other tasks if they have it set to allow only one running at a time
             if(Setting('only-one')) {
-                for(var i = 0; i < task_count; i++) {
+                for(let i = 0; i < task_count; i++) {
                     if(tasks[i].last_tick) toggle_task(i);
                 }
             }
@@ -247,13 +251,13 @@ function toggle_task(task, update) {
             // Set the task's last tick to now
             tasks[task].last_tick = Date.now();
 
-            $('#task-'+ task +' button.toggle').text(locale('btnStop'));
-            $('#task-'+ task +' img.toggle').attr('title', locale('btnStop')).attr('src', 'style/images/control_pause_blue.png');
+            $(`#task-${task} button.toggle`).text(locale('btnStop'));
+            $(`#task-${task} img.toggle`).attr('title', locale('btnStop')).attr('src', 'style/images/control_pause_blue.png');
             if(displaying_task == task) $('#task-toggle').text(locale('btnStop'));
-            $('#task-'+ task).addClass('running');
+            $(`#task-${task}`).addClass('running');
 
             // Set a future alarm for the task reaching its goal
-            if(Setting('background-running') && !tasks[task].indefinite) chrome.alarms.create('task-' + task, {when: Date.now() + (tasks[task].goal_hours * 3600 + tasks[task].goal_mins * 60 - tasks[task].current_hours * 3600 - tasks[task].current_mins * 60 - tasks[task].current_secs) * 1000});
+            if(Setting('background-running') && !tasks[task].indefinite) chrome.alarms.create(`task-${task}`, {when: Date.now() + (tasks[task].goal_hours * 3600 + tasks[task].goal_mins * 60 - tasks[task].current_hours * 3600 - tasks[task].current_mins * 60 - tasks[task].current_secs) * 1000});
         }
     } catch(e) {
         js_error(e);

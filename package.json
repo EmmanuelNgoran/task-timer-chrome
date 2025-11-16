@@ -1,0 +1,29 @@
+{
+  "name": "task-timer-chrome",
+  "version": "3.10.6",
+  "description": "Task Timer - A Chrome extension for tracking time spent on tasks",
+  "main": "scripts/main.js",
+  "scripts": {
+    "test": "echo \"No tests specified yet\" && exit 0",
+    "lint": "echo \"No linter configured yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmanuelNgoran/task-timer-chrome.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "task-timer",
+    "time-tracking",
+    "productivity"
+  ],
+  "author": "Schuyler Cebulskie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EmmanuelNgoran/task-timer-chrome/issues"
+  },
+  "homepage": "https://github.com/EmmanuelNgoran/task-timer-chrome#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
