@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Timer - UI Modernization Preview</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style/global.css">
+    <link rel="stylesheet" href="style/main.css">
+    <style>
+        .preview-container {
+            padding: 40px 20px;
+        }
+        .preview-section {
+            margin: 40px 0;
+        }
+        .preview-title {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <h1 style="color: white; text-align: center; font-size: 3em; margin-bottom: 10px;">Task Timer</h1>
+        <h2 style="color: white; text-align: center; margin-bottom: 40px;">Modernized UI Preview</h2>
+        
+        <div class="container">
+            <div class="preview-section">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Modern Buttons</h3>
+                <button>Primary Button</button>
+                <button class="save">Save Button</button>
+                <button class="cancel">Cancel Button</button>
+            </div>
+            
+            <div class="preview-section">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Input Fields</h3>
+                <input type="text" placeholder="Task Name" style="width: 300px;">
+                <br><br>
+                <input type="number" value="4" min="0" max="80" style="width: 100px;">
+            </div>
+            
+            <div class="preview-section">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Progress Bar</h3>
+                <progress max="100" value="65" style="width: 100%; height: 24px;"></progress>
+            </div>
+            
+            <div class="preview-section">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Task Table Preview</h3>
+                <table style="width: 100%; border-spacing: 0 8px;">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <th style="padding: 16px; border-radius: 12px 0 0 12px;">Task</th>
+                            <th style="padding: 16px;">Time</th>
+                            <th style="padding: 16px;">Goal</th>
+                            <th style="padding: 16px; border-radius: 0 12px 12px 0;">Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: white; transition: all 0.3s;">
+                            <td style="padding: 16px; border-radius: 12px 0 0 12px; font-weight: 500;">Sample Task 1</td>
+                            <td style="padding: 16px; color: #667eea; font-weight: 500;">1:30:00</td>
+                            <td style="padding: 16px; color: #764ba2; font-weight: 500;">4:00:00</td>
+                            <td style="padding: 16px; border-radius: 0 12px 12px 0;">
+                                <progress max="100" value="37" style="width: 100%; height: 20px;"></progress>
+                            </td>
+                        </tr>
+                        <tr class="running" style="transition: all 0.3s;">
+                            <td style="padding: 16px; border-radius: 12px 0 0 12px; font-weight: 600;">Active Task</td>
+                            <td style="padding: 16px; color: #667eea; font-weight: 500;">2:15:30</td>
+                            <td style="padding: 16px; color: #764ba2; font-weight: 500;">3:00:00</td>
+                            <td style="padding: 16px; border-radius: 0 12px 12px 0;">
+                                <progress max="100" value="75" style="width: 100%; height: 20px;"></progress>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="preview-section">
+                <h3 style="color: #667eea; margin-bottom: 20px;">Alert Examples</h3>
+                <div id="success" style="display: block; position: static; margin-bottom: 10px;">
+                    Task completed successfully!
+                </div>
+                <div id="error" style="display: block; position: static;">
+                    Error: Task name cannot be empty
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
