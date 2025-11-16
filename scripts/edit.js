@@ -7,24 +7,24 @@ function edit_name(task) {
             editing_task = task;
 
             // Disable the task's toggle button
-            $('#task-'+ task +' button.toggle').attr('disabled', 'disabled');
-            $('#task-'+ task +' img.toggle').addClass('disabled');
+            $(`#task-${task} button.toggle`).attr('disabled', 'disabled');
+            $(`#task-${task} img.toggle`).addClass('disabled');
 
             // Replace the text with a text field and a save button
-            $('#task-'+ task +' td.text').empty();
-            $('#name-edit-template').clone().attr('id', 'name-edit-'+ task).appendTo('#task-'+ task +' td.text');
+            $(`#task-${task} td.text`).empty();
+            $('#name-edit-template').clone().attr('id', `name-edit-${task}`).appendTo(`#task-${task} td.text`);
 
             // Set the current name and focus
-            $('#name-edit-'+ task +' input').val(tasks[task].text).focus();
+            $(`#name-edit-${task} input`).val(tasks[task].text).focus();
 
             // Set names & add events
-            $('#name-edit-'+ task +' input').attr('name', task).keypress(function (e) {
+            $(`#name-edit-${task} input`).attr('name', task).keypress(function (e) {
                 if(e.keyCode == 13) save_name(parseInt(this.name, 10));
             });
-            $('#name-edit-'+ task +' button.save').attr('name', task).click(function() {
+            $(`#name-edit-${task} button.save`).attr('name', task).click(function() {
                 save_name(parseInt(this.name, 10));
             });
-            $('#name-edit-'+ task +' button.cancel').click(function() {
+            $(`#name-edit-${task} button.cancel`).click(function() {
                 cancel_edit();
             });
         } else {
@@ -38,9 +38,9 @@ function edit_name(task) {
 // Finish editing a task's name
 function save_name(task) {
     try {
-        if($('#name-edit-'+ task +' input').val() !== '') {
+        if($(`#name-edit-${task} input`).val() !== '') {
             // Set the name
-            tasks[task].text = $('#name-edit-'+ task +' input').val();
+            tasks[task].text = $(`#name-edit-${task} input`).val();
 
             // Finish editing
             rebuild_list();
